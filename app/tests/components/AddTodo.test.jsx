@@ -24,8 +24,6 @@ describe('AddTodo',()=>{
 
       expect(spy).toHaveBeenCalledWith(todoText);
 
-
-
     })
 
     it('should not call onAddTodo prop when invalid input', ()=>{
