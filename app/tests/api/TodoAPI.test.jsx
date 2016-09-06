@@ -47,9 +47,69 @@ it('should return todos if valid array in localstorage', ()=>{
   localStorage.setItem('todos', JSON.stringify(todos));
 
   var actualTodos = JSON.parse(localStorage.getItem('todos'));
-  
+
   expect(actualTodos).toEqual(todos);
 });
+
+  })
+
+  describe('filter todos', ()=>{
+    var todos = [{
+      id:1,
+      text:'Some text here',
+      completed: false
+    },
+    {
+      id:2,
+      text:'Other text here',
+      completed: true
+    },
+    {
+
+     id:3,
+      text:'Some text here',
+      completed: true
+    }  ];
+
+    it('should return all items if showcompleted is true',()=>{
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      expect(filteredTodos.length).toBe(3);
+
+
+    })
+
+    it('should return non completed todos when show completed is false',()=>{
+
+      var filteredTodos = TodoAPI.filterTodos(todos, false, '');
+      expect(filteredTodos.length).toBe(1);
+
+
+    })
+    it('should sort by completed status', ()=>{
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+
+      expect(filteredTodos[0].completed).toBe(false);
+
+
+    })
+
+    it('should filter todos by search text', ()=>{
+      var filteredTodos = TodoAPI.filterTodos(todos, true, 'some');
+
+      expect(filteredTodos.length).toBe(2);
+
+
+    })
+
+    it('should filter todos by search text', ()=>{
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+
+      expect(filteredTodos.length).toBe(3);
+
+
+    })
+
+
 
 
   })
